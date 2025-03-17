@@ -2,43 +2,97 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Build My PC - Coming Soon</title>
+  <!-- Importa il font Roboto da Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
+    /* Impostazioni generali e sfondo gradient */
     body {
-      background-color: #1a1a1a;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
     }
+    /* Container centrale */
+    .container {
+      max-width: 800px;
+      padding: 20px;
+    }
+    /* Stile del titolo */
     h1 {
       font-size: 3rem;
       margin-bottom: 0.5rem;
+      animation: fadeIn 2s ease-in-out;
     }
-    p {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .logo {
-      font-weight: bold;
-      color: #ffcc00;
-    }
+    /* Stile del sottotitolo */
     .coming-soon {
       font-size: 2rem;
+      font-weight: bold;
       color: #ffcc00;
+      animation: fadeIn 2.5s ease-in-out;
+    }
+    /* Stile dei paragrafi */
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 3s ease-in-out;
+    }
+    /* Countdown styling */
+    .countdown {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 3.5s ease-in-out;
+    }
+    /* Footer in basso */
+    .footer {
+      font-size: 1rem;
+      opacity: 0.7;
+      margin-top: 2rem;
+    }
+    /* Animazione di fadeIn */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div>
-    <h1 class="logo">Build My PC</h1>
+  <div class="container">
+    <h1>Build My PC</h1>
     <p class="coming-soon">Coming Soon</p>
-    <p>Stiamo lavorando per offrirti il miglior configuratore di PC!</p>
+    <p>Il miglior configuratore di PC in arrivo. Preparati a creare la build perfetta per te!</p>
+    <div class="countdown" id="countdown"></div>
+    <div class="footer">Seguici per aggiornamenti: @buildmypc</div>
   </div>
+  <script>
+    // Countdown timer: impostato per un lancio tra 1 mese (modifica la data se necessario)
+    const countdownElement = document.getElementById("countdown");
+    const targetDate = new Date();
+    targetDate.setMonth(targetDate.getMonth() + 1); // Lancia tra 1 mese
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+      if (diff <= 0) {
+        countdownElement.innerHTML = "Lancio Avvenuto!";
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      countdownElement.innerHTML = `${days}g ${hours}h ${minutes}m ${seconds}s`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
